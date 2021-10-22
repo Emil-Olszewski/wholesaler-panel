@@ -14,7 +14,7 @@ namespace Core.Application.Tests.Features
     public class CountQuantitySalePricesCommandTest
     {
         [Test]
-        public async Task Test()
+        public async Task CountQuantitySaleTest()
         {
             // Arrange
             var repositoryMock = SetupRepositoryMock();
