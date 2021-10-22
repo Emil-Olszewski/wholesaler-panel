@@ -18,9 +18,4 @@
     <ItemGroup>
       <ProjectReference Include="..\Core.Application\Core.Application.csproj" />
     </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="obj\Debug\net5.0" />
-    </ItemGroup>
-
 </Project>
