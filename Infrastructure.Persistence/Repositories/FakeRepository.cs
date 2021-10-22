@@ -25,7 +25,7 @@ namespace Infrastructure.Persistence.Repositories
             var result = storage.Customers.FirstOrDefault(x => x.Id == id);
             if (result is null)
             {
-                throw new ResourceNotFoundException($"{typeof(Domain.Models.Customer)} Id:{id} does not exist.");
+                throw new ResourceNotFoundException($"{typeof(Domain.Models.Customer)} CustomerId:{id} does not exist.");
             }
 
             return Task.FromResult(mapper.Map<Domain.Models.Customer>(result));

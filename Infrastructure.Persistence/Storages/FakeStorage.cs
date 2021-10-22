@@ -14,7 +14,7 @@ namespace Infrastructure.Persistence.Storages
         private const int MinQuantity = 50;
         private const int MaxQuantity = 2000;
 
-        private Random random = new Random();
+        private readonly Random random = new();
         
         public List<Product> Products { get; }
         public List<ProductPrice> ProductPrices { get; }
@@ -63,7 +63,7 @@ namespace Infrastructure.Persistence.Storages
                 {
                     ProductId = product.Id,
                     Product = product,
-                    Price = random.Next(100,10000) + (random.Next(0, 100) / 100)
+                    Price = random.Next(100, 5000) + (decimal)(random.Next(0, 100) * 0.01)
                 });
 
                 product.Price = ProductPrices.Last();

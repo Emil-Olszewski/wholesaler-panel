@@ -6,7 +6,7 @@ using Infrastructure.Shared;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace ConsoleClient // Note: actual namespace depends on the project name.
+namespace ConsoleClient
 {
     public static class Program
     {
@@ -16,26 +16,32 @@ namespace ConsoleClient // Note: actual namespace depends on the project name.
         {
             RegisterServices();
             IServiceScope scope = serviceProvider.CreateScope();
-            var app = new ConsoleApplication(scope.ServiceProvider.GetService<IMediator>());
-            app.Run();
+            await RunApp(scope);
             DisposeServices();
         }
-        
+
+        private static async Task RunApp(IServiceScope scope)
+        {
+            var app = new ConsoleApplication(scope.ServiceProvider.GetService<IMediator>());
+            await app.Run();
+        }
+
         private static void RegisterServices()
         {
             var services = new ServiceCollection();
+            
             services.AddApplicationLayer();
             services.AddPersistenceInfrastructure();
             services.AddSharedInfrastructure();
+            
             serviceProvider = services.BuildServiceProvider(true);
-
         }
         
         private static void DisposeServices()
         {
-            if (serviceProvider is IDisposable d)
+            if (serviceProvider is IDisposable disposable)
             {
-                d.Dispose();
+                disposable.Dispose();
             }
         }
     }
